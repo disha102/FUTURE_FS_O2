@@ -1,0 +1,31 @@
+
+document.getElementById('loginForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value.trim();
+  const messageEl = document.getElementById('message');
+
+  if (!email || !password) {
+    messageEl.textContent = "Please enter both email and password.";
+    return;
+  }
+
+  try {
+    // Example: send to your backend API
+    // let response = await fetch("/api/login", { method: "POST", ... });
+
+    // Fake response for demo
+    if (email === "admin@example.com" && password === "password123") {
+      messageEl.style.color = "green";
+      messageEl.textContent = "Login successful! Redirecting…";
+      setTimeout(() => window.location.href = "/dashboard", 1000);
+    } else {
+      throw new Error("Invalid credentials");
+    }
+
+  } catch (err) {
+    messageEl.style.color = "#d00";
+    messageEl.textContent = "Login failed: " + err.message;
+  }
+});
